@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:request-config name="BestBuyReqst" doc:name="HTTP Request configuration" doc:id="5a07ccda-2cbe-473e-8419-9bfc55b17fc6" >
+		<http:request-connection host="localhost" port="8889" />
+	</http:request-config>
+	<flow name="getallitems" doc:id="80ffe5dd-9596-4d1d-8d67-8a8773b6e93d" >
+		<http:request method="GET" doc:name="Request" doc:id="41d4b672-cf87-4b09-92b8-91366ee44734" config-ref="BestBuyReqst" path="/bestbuy"/>
+		<ee:transform doc:name="Transform Message" doc:id="26c42dd8-0b92-4606-aeb5-84f58cf5e78c">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

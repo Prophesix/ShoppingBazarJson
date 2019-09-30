@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="BestBuyJson" format="json">
+      <types:shape format="weave" example="Jsob_outsample/bestbuy_sample_response.JSON"><![CDATA[%dw 2.0
+
+type BestBuyJson = Array<{|  description: String,   itemID: String,   itemPrice: Number {"typeId": "int"},   itemName: String,   itemOrigin: String|}> {"example": "[{\"description\":\"Desktop computer description\",\"itemID\":\"101\",\"itemPrice\":1500,\"itemName\":\"Desktop\",\"itemOrigin\":\"BestBuy\"},{\"description\":\"Desktop computer description\",\"itemID\":\"101\",\"itemPrice\":1500,\"itemName\":\"Desktop\",\"itemOrigin\":\"BestBuy\"}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#26c42dd8-0b92-4606-aeb5-84f58cf5e78c">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

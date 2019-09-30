@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="BestBuy-DBcall" doc:name="HTTP Listener config" doc:id="edc5cc9c-dea7-4fa4-b4c1-9ff103e8f0b8" >
+		<http:listener-connection host="0.0.0.0" port="8889" />
+	</http:listener-config>
+	<flow name="BestBuy_mockFlow" doc:id="f5acd37d-a6db-4326-8033-949776e3c80f" >
+		<http:listener doc:name="Listener" doc:id="d2e1338e-048b-4172-ae14-ebecefb2b886" config-ref="BestBuy-DBcall" path="/bestbuy"/>
+		<file:read doc:name="Read JSON" doc:id="0b2d5159-4847-45b4-947c-f2855e9744bb" path="/Users/henokejigu/Documents/Development/Workspaces/shoppingbazarjson/src/main/resources/Jsob_outsample/bestbuy_sample_response.JSON" outputMimeType="application/json"/>
+	</flow>
+</mule>
