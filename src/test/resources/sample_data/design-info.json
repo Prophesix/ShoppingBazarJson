@@ -1,0 +1,10 @@
+{
+  "sampleData": {
+    "f6cfdc13-f375-4356-ab48-ed527f385109": {},
+    "eb620804-63ef-44e1-b007-a060c9841737": {},
+    "e884d925-1ffc-4dd0-892b-e0583c45b8eb": {
+      "payload": "sample_data/list_json.json",
+      "attributes": "sample_data/httpresponseattributes.dwl"
+    }
+  }
+}

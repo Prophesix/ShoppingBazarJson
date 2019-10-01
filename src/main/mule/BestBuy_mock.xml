@@ -5,11 +5,19 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
-	<http:listener-config name="BestBuy-DBcall" doc:name="HTTP Listener config" doc:id="edc5cc9c-dea7-4fa4-b4c1-9ff103e8f0b8" >
+	<file:config name="File_Config" doc:name="File Config" doc:id="80d64167-e070-4510-8bd8-284119298f88" >
+		<file:connection />
+	</file:config>
+	<http:listener-config name="BestBuy_mock" doc:name="HTTP Listener config" doc:id="48f1a43b-98d0-411d-8db1-078b2878a6c2" >
 		<http:listener-connection host="0.0.0.0" port="8889" />
 	</http:listener-config>
-	<flow name="BestBuy_mockFlow" doc:id="f5acd37d-a6db-4326-8033-949776e3c80f" >
-		<http:listener doc:name="Listener" doc:id="d2e1338e-048b-4172-ae14-ebecefb2b886" config-ref="BestBuy-DBcall" path="/bestbuy"/>
+	<flow name="searchallitesm" doc:id="f5acd37d-a6db-4326-8033-949776e3c80f" >
+		<http:listener doc:name="Listener" doc:id="d2e1338e-048b-4172-ae14-ebecefb2b886" path="/search/items" config-ref="BestBuy_mock" allowedMethods="GET,POST,PUT"/>
 		<file:read doc:name="Read JSON" doc:id="0b2d5159-4847-45b4-947c-f2855e9744bb" path="/Users/henokejigu/Documents/Development/Workspaces/shoppingbazarjson/src/main/resources/Jsob_outsample/bestbuy_sample_response.JSON" outputMimeType="application/json"/>
+	</flow>
+	<flow name="getitembyid" doc:id="6fc61634-c0d4-4118-9511-72634479c081" >
+		<http:listener doc:name="Listener" doc:id="8680b07b-c56a-42dc-bea0-eb2f9f21c0f6" path="/item/{item_id}" outputMimeType="application/json" config-ref="BestBuy_mock" allowedMethods="GET,DELETE">
+		</http:listener>
+		<file:read doc:name="Read" doc:id="a6c46dad-8415-49da-a910-18589574b09a" path="/Users/henokejigu/Documents/Development/Workspaces/shoppingbazarjson/src/main/resources/Jsob_outsample/bestbuy_sample_response.JSON" outputMimeType="application/json"/>
 	</flow>
 </mule>

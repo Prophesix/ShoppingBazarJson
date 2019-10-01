@@ -6,11 +6,82 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<http:request-config name="BestBuyReqst" doc:name="HTTP Request configuration" doc:id="5a07ccda-2cbe-473e-8419-9bfc55b17fc6" >
+	<http:request-config name="BestBuyReqst" doc:name="BestBuyReqst" doc:id="5a07ccda-2cbe-473e-8419-9bfc55b17fc6" >
 		<http:request-connection host="localhost" port="8889" />
 	</http:request-config>
+	<flow name="postitembestbuy" doc:id="1fb8c1f1-fd8d-45d7-91d5-2d3e041180a0" >
+		<http:request method="POST" doc:name="Request" doc:id="1b956aec-127f-4114-8a47-ffe2fac18919" path="/item/{item_id}" config-ref="BestBuyReqst" outputMimeType="application/json">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"item_id" : attributes.uriParams.item_id
+}]]]></http:uri-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="e9199b06-3e03-4187-a599-ea06d2975d69" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getitembyId" doc:id="03fd07f3-3ed7-4d08-b8f0-b827970390b6" >
+		<http:request method="GET" doc:name="Request" doc:id="42ad7c47-39f0-4a27-8e5f-5b8f2524edd1" path="/item/{item_id}" config-ref="BestBuyReqst">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"item_id" : attributes.uriParams.item_id
+}]]]></http:uri-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="e884d925-1ffc-4dd0-892b-e0583c45b8eb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="putiteminbestbuy" doc:id="ccc3c989-4f85-4793-9a48-a3ab7574eec8" >
+		<http:request method="PUT" doc:name="Request" doc:id="d67cff14-7553-4e7f-a7ec-52f5eb0ff6a6" path="/item/{item_id}" config-ref="BestBuyReqst">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"item_id" : attributes.uriParams.item_id
+}]]]></http:uri-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="13b80120-a358-484e-89fb-dbdda92bf49b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="deletitemwithitemid" doc:id="87914b12-c33c-4597-b657-0b35f30129b2" >
+		<http:request method="DELETE" doc:name="Request" doc:id="ed5162d9-9f35-4f0d-8831-132bf46220ff" path="/item/{item_id}" config-ref="BestBuyReqst">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"item_id" : attributes.uriParams.item_id
+}]]]></http:uri-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="0e14a496-ebcb-4baf-bc7f-0bea5f0b374b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "item has been delted"
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
 	<flow name="getallitems" doc:id="80ffe5dd-9596-4d1d-8d67-8a8773b6e93d" >
-		<http:request method="GET" doc:name="Request" doc:id="41d4b672-cf87-4b09-92b8-91366ee44734" config-ref="BestBuyReqst" path="/bestbuy"/>
+		<http:request method="GET" doc:name="Request" doc:id="41d4b672-cf87-4b09-92b8-91366ee44734" config-ref="BestBuyReqst" path="/search/items"/>
 		<ee:transform doc:name="Transform Message" doc:id="26c42dd8-0b92-4606-aeb5-84f58cf5e78c">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0

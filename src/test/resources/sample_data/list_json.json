@@ -1,16 +1,16 @@
-  [
-      {
-      "itemID": "101",
+[
+   {
+     "itemID": "101",
       "description": "laptop computer description",
       "itemPrice": 1400,
       "itemName": "Laptop",
      "itemOrigin": "BestBuy"
-    },
-    {
-       "itemID": "102",
+   },
+   {
+     "itemID": "102",
       "description": "Desktop computer description",
       "itemPrice": 1500,
       "itemName": "Desktop",
        "itemOrigin": "BestBuy"
-    }
-  ]
+}
+]

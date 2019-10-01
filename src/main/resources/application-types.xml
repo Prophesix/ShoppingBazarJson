@@ -16,6 +16,124 @@ type BestBuyJson = Array<{|  description: String,   itemID: String,   itemPrice:
           <types:payload type="BestBuyJson"/>
         </types:message>
       </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#0e14a496-ebcb-4baf-bc7f-0bea5f0b374b">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#13b80120-a358-484e-89fb-dbdda92bf49b">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e884d925-1ffc-4dd0-892b-e0583c45b8eb">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e9199b06-3e03-4187-a599-ea06d2975d69">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#eb620804-63ef-44e1-b007-a060c9841737">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+          <types:attributes type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:variables>
+          <types:variable name="item_id" type="BestBuyJson"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#f6cfdc13-f375-4356-ab48-ed527f385109">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+          <types:attributes type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:variables>
+          <types:variable name="item_id" type="BestBuyJson"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#872d788b-2589-4b0a-b154-fcbf5b115d0d">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:variables>
+          <types:variable name="item_id" type="BestBuyJson"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#eb29ea60-156a-4d68-82dd-7d3b908b279a">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:variables>
+          <types:variable name="item_id" type="BestBuyJson"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#c8bb08e8-80c9-4269-a2ca-391220cb6858">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="BestBuyJson"/>
+        </types:message>
+      </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
 </types:mule>
