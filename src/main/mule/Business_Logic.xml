@@ -6,10 +6,8 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<http:request-config name="BestBuyReqst" doc:name="BestBuyReqst" doc:id="5a07ccda-2cbe-473e-8419-9bfc55b17fc6" >
-		<http:request-connection host="localhost" port="8889" />
-	</http:request-config>
 	<flow name="postitembestbuy" doc:id="1fb8c1f1-fd8d-45d7-91d5-2d3e041180a0" >
+		<logger level="INFO" doc:name="sendputitem" doc:id="1a35f925-32e5-4f35-ae38-61ae1e68da3c" message="#[payload]"/>
 		<http:request method="POST" doc:name="Request" doc:id="1b956aec-127f-4114-8a47-ffe2fac18919" path="/item/{item_id}" config-ref="BestBuyReqst" outputMimeType="application/json">
 			<http:uri-params ><![CDATA[#[output application/java
 ---
@@ -19,14 +17,13 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		</http:request>
 		<ee:transform doc:name="Transform Message" doc:id="e9199b06-3e03-4187-a599-ea06d2975d69" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload]]></ee:set-payload>
+				<ee:set-payload ><![CDATA[attributes.uriParams.item_id]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="updatesucessfully" doc:id="75aa4b6b-9ea7-4c98-9185-66bef4598445" message="#[payload]"/>
 	</flow>
 	<flow name="getitembyId" doc:id="03fd07f3-3ed7-4d08-b8f0-b827970390b6" >
+		<logger level="INFO" doc:name="itembyID" doc:id="58610fde-758a-4dc6-81c7-d40547b0edf3" message="#[payload]"/>
 		<http:request method="GET" doc:name="Request" doc:id="42ad7c47-39f0-4a27-8e5f-5b8f2524edd1" path="/item/{item_id}" config-ref="BestBuyReqst">
 			<http:uri-params ><![CDATA[#[output application/java
 ---
@@ -42,25 +39,10 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-	</flow>
-	<flow name="putiteminbestbuy" doc:id="ccc3c989-4f85-4793-9a48-a3ab7574eec8" >
-		<http:request method="PUT" doc:name="Request" doc:id="d67cff14-7553-4e7f-a7ec-52f5eb0ff6a6" path="/item/{item_id}" config-ref="BestBuyReqst">
-			<http:uri-params ><![CDATA[#[output application/java
----
-{
-	"item_id" : attributes.uriParams.item_id
-}]]]></http:uri-params>
-		</http:request>
-		<ee:transform doc:name="Transform Message" doc:id="13b80120-a358-484e-89fb-dbdda92bf49b" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
+		<logger level="INFO" doc:name="itemretrivedbyid" doc:id="8b6726e6-8823-4585-9ed9-7d4995d5f922" message="#[payload]"/>
 	</flow>
 	<flow name="deletitemwithitemid" doc:id="87914b12-c33c-4597-b657-0b35f30129b2" >
+		<logger level="INFO" doc:name="startdeleting" doc:id="0fd36ec7-1ad7-46bb-a5f0-0479903e75af" message="#[payload]"/>
 		<http:request method="DELETE" doc:name="Request" doc:id="ed5162d9-9f35-4f0d-8831-132bf46220ff" path="/item/{item_id}" config-ref="BestBuyReqst">
 			<http:uri-params ><![CDATA[#[output application/java
 ---
@@ -79,8 +61,10 @@ output application/json
 ]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="itemdeleted" doc:id="0d63bdb5-333c-40da-a539-3006121c3a13" message="#[payload]"/>
 	</flow>
 	<flow name="getallitems" doc:id="80ffe5dd-9596-4d1d-8d67-8a8773b6e93d" >
+		<logger level="INFO" doc:name="searchallitestart" doc:id="03f802d2-60fb-4dd0-813f-6f8bd024120a" />
 		<http:request method="GET" doc:name="Request" doc:id="41d4b672-cf87-4b09-92b8-91366ee44734" config-ref="BestBuyReqst" path="/search/items"/>
 		<ee:transform doc:name="Transform Message" doc:id="26c42dd8-0b92-4606-aeb5-84f58cf5e78c">
 			<ee:message>
@@ -90,5 +74,19 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="allitemsquried" doc:id="3825ae68-dfdc-4b18-ac04-14500286d14b" message="#[payload]"/>
+	</flow>
+	<flow name="PutitemByID" doc:id="b7b9655e-3cd8-4236-bf11-495a08cee797" >
+		<logger level="INFO" doc:name="PutItById" doc:id="f1a8ae19-15dd-4352-b5a9-a91e8b24c06b" />
+		<http:request method="PUT" doc:name="Request" doc:id="030958ea-3d55-4f42-aec4-690a6a17d787" path="/item/{item_id}" config-ref="BestBuyReqst"/>
+		<ee:transform doc:name="Transform Message" doc:id="38b69f94-c392-4253-9ad7-6565d64fae1d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="ItemUpdatedByID" doc:id="c688837e-6be6-41f2-b780-481f150139c0" message="#[payload]" />
 	</flow>
 </mule>

@@ -1,10 +1,10 @@
 #%RAML 1.0
-title: Shopping Bazar BestBuy
+title: shopping-bazar-bestbuy
 version: 1.0
 baseUri: api
-types:
- # Fullinventory: !include datatypes/FullInventory.raml
-
+uses:
+  common:
+    /exchange_modules/82915fac-aca8-4c8a-8d0b-8344c8524078/common/1.0.2/common.raml
 /search/items:
   get:
     displayName: Search all items
@@ -13,7 +13,7 @@ types:
       200:
        body:
           application/json: 
-#           type: Fullinventory[]
+            type: common.shoppingItemType[]
 /item/{item_id}:
       get:
         displayName: Get Item
@@ -22,21 +22,24 @@ types:
           200:
             body:
               application/json: 
-   #             type: Fullinventory
+                type: common.shoppingItemType
       put:
         displayName:  Update Item
         description:  Update existing item
+        body:
+          application/json:
+            type: common.shoppingItemType
         responses:
           201:
             body:
               application/json:
-                example: |
+                example: 
                   message: item has been updated
       delete:
         displayName: Delete Item
         description: Delete existing item.
         responses:
-          201:
+          204:
             body:
               application/json:
                 examples:
@@ -45,7 +48,8 @@ types:
         displayName: Add Item
         description: Create a new item for a given store.
         body:
-          application/json:             
+          application/json: 
+            type: common.shoppingItemType            
         responses:
           201:
             body:

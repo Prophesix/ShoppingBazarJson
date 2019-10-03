@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<http:request-config name="BestBuyReqst" doc:name="BestBuyReqst" doc:id="addc75d7-0e53-4d1b-87e7-7055f920334e" >
+		<http:request-connection host="${http.host}" port="${http.bestbuyport}" />
+	</http:request-config>
+	<http:listener-config name="BestBuy_mock" doc:name="HTTP Listener config" doc:id="c38a7541-3f3d-45d4-ac4a-b6f40b02f20b" >
+		<http:listener-connection host="0.0.0.0" port="${http.bestbuyport}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="0a600544-7bf1-4fd4-ae92-2c50227c69f0" file="config-local.yaml" />
+	</mule>

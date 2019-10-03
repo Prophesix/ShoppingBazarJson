@@ -8,9 +8,6 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 	<file:config name="File_Config" doc:name="File Config" doc:id="80d64167-e070-4510-8bd8-284119298f88" >
 		<file:connection />
 	</file:config>
-	<http:listener-config name="BestBuy_mock" doc:name="HTTP Listener config" doc:id="48f1a43b-98d0-411d-8db1-078b2878a6c2" >
-		<http:listener-connection host="0.0.0.0" port="8889" />
-	</http:listener-config>
 	<flow name="searchallitesm" doc:id="f5acd37d-a6db-4326-8033-949776e3c80f" >
 		<http:listener doc:name="Listener" doc:id="d2e1338e-048b-4172-ae14-ebecefb2b886" path="/search/items" config-ref="BestBuy_mock" allowedMethods="GET,POST,PUT"/>
 		<file:read doc:name="Read JSON" doc:id="0b2d5159-4847-45b4-947c-f2855e9744bb" path="/Users/henokejigu/Documents/Development/Workspaces/shoppingbazarjson/src/main/resources/Jsob_outsample/bestbuy_sample_response.JSON" outputMimeType="application/json"/>
